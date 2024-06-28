@@ -1,26 +1,24 @@
-from fastapi import FastAPI
+# from fastapi import FastAPI
 
 
-app = FastAPI()
+# app = FastAPI()
 
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+# @app.get("/")
+# def read_root():
+#     return {"Hello": "World"}
 
 
-ls = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-ls.reverse()
-print(ls)
+import socket
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(("localhost", 9999))
 
+server.listen()
 
-ls.sort(reverse=True)
-print(ls)
-
-ls.sort(key=lambda a: a)
-print(ls)
-
-ls.sort(key=lambda a: a, reverse=True)
-print(ls)
+while True:
+    client, addr = server.accept()
+    client.send("client send hello world".encode())
+    print(client.recv(1024).decode())
+    client.close()
 
 

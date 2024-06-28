@@ -1,6 +1,8 @@
 import stripe
+import os
 
-stripe.api_key = "sk_test_51PWFIcBhcUPuSny3R6VHeKmwi13stBwED0mfOmdTynxItJWmIEwi4MaA0369HWDCDGvLrZxEqIlxYA2y1uTP0Xey00yjTuQqyK"
+# load from env
+stripe.api_key = os.getenv('API_KEY')
 
 starter_subscription = stripe.Product.create(
     name="Starter Subscription",
